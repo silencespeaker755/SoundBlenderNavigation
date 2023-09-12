@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>800894965333-uqhejtgcs6u7pub5sssc4p46t4fg08od.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.800894965333-uqhejtgcs6u7pub5sssc4p46t4fg08od</string>
+	<key>API_KEY</key>
+	<string>AIzaSyD0o0anBxsRy6wLoIxVYsWylJe8fq5FNpo</string>
+	<key>GCM_SENDER_ID</key>
+	<string>800894965333</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.UIST23.SoundProxy</string>
+	<key>PROJECT_ID</key>
+	<string>soundproxy-55bf9</string>
+	<key>STORAGE_BUCKET</key>
+	<string>soundproxy-55bf9.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:800894965333:ios:e912364f795a266a1ee6dc</string>
+	<key>DATABASE_URL</key>
+	<string>https://soundproxy-55bf9-default-rtdb.asia-southeast1.firebasedatabase.app</string>
+</dict>
+</plist>

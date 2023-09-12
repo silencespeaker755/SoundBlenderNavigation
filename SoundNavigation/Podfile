@@ -1,0 +1,12 @@
+platform :ios, '15.0'
+workspace 'SoundNavigation.xcworkspace'
+use_frameworks!
+
+target 'SoundNavigation' do
+  pod 'GVRKit' , '1.140.0'
+  pod 'GVRAudioSDK' , '1.140.0'
+  pod 'GoogleMaps', '5.1.0'
+  pod 'Firebase', '>= 9.6.0'
+  pod 'FirebaseAnalytics'
+  pod 'Firebase/Database'
+end
