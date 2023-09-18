@@ -26,6 +26,8 @@ struct SoundNavigationApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
     static var playingAvailable:Bool = false
+    static var isPlaying:Bool = false
+    static var someoneSpeeching:Bool = false
     
     init() {
         GMSServices.provideAPIKey("AIzaSyBIy0SAXuXjbGpz9B2lZu-4wC_7ShSl7Ak")

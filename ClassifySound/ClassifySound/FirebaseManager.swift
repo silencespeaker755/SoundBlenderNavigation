@@ -13,10 +13,13 @@ struct DetectionCell: Identifiable, Codable {
     var id: Int
     var state: Bool
     var number: Int
+    var sources: [String]
 }
 
 class FirebaseManager: ObservableObject {
     static let databasePath: DatabaseReference = Database.database().reference()
+    
+    static var detectionCell:DetectionCell = DetectionCell(id:0, state:false, number:0, sources:[])
     
     func updateRealmData(updateID: Int, data: Any) {
         FirebaseManager.databasePath.queryOrdered(byChild: "id")
@@ -32,12 +35,11 @@ class FirebaseManager: ObservableObject {
                                   })
     }
     
-    func sendData(state: Bool, soundNum: Int) {
-        let temp = try? JSONEncoder().encode(DetectionCell(id: 0, state: state, number: soundNum))
+    func sendData(state: Bool, soundNum: Int, sources: [String]) {
+        let temp = try? JSONEncoder().encode(DetectionCell(id: 0, state: state, number: soundNum, sources: sources))
         let json = try? JSONSerialization.jsonObject(with: temp!)
         FirebaseManager.databasePath.child("Detection").setValue(json)
 //        updateRealmData(updateID: 0, data: json as Any)
-        print("---Updated---", state)
     }
     
     func deleteAllData() {

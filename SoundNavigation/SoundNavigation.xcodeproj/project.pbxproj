@@ -17,6 +17,11 @@
 		96D4CE752AAF7D6A00F8C2DC /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D4CE742AAF7D6A00F8C2DC /* FirebaseManager.swift */; };
 		96D4CFC92AB067E800F8C2DC /* left.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 96D4CFC72AB067E800F8C2DC /* left.mp3 */; };
 		96D4CFCA2AB067E800F8C2DC /* right.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 96D4CFC82AB067E800F8C2DC /* right.mp3 */; };
+		96D4CFCC2AB0D73D00F8C2DC /* SoundList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D4CFCB2AB0D73D00F8C2DC /* SoundList.swift */; };
+		96D4CFD12AB218BC00F8C2DC /* CoreLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D4CFD02AB218BC00F8C2DC /* CoreLocation.swift */; };
+		96D4CFD32AB2194600F8C2DC /* Polyline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D4CFD22AB2194600F8C2DC /* Polyline.swift */; };
+		96D4CFD52AB227D100F8C2DC /* mapStyle.json in Resources */ = {isa = PBXBuildFile; fileRef = 96D4CFD42AB227D100F8C2DC /* mapStyle.json */; };
+		96D4CFD72AB3649700F8C2DC /* speech.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 96D4CFD62AB3649700F8C2DC /* speech.mp3 */; };
 		C799A65F263BBB3C000E6127 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C799A65E263BBB3C000E6127 /* Assets.xcassets */; };
 		C799A662263BBB3C000E6127 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C799A661263BBB3C000E6127 /* Preview Assets.xcassets */; };
 		C799A671263BBBB4000E6127 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C799A66D263BBBB4000E6127 /* ContentView.swift */; };
@@ -35,6 +40,11 @@
 		96D4CE742AAF7D6A00F8C2DC /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		96D4CFC72AB067E800F8C2DC /* left.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = left.mp3; sourceTree = "<group>"; };
 		96D4CFC82AB067E800F8C2DC /* right.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = right.mp3; sourceTree = "<group>"; };
+		96D4CFCB2AB0D73D00F8C2DC /* SoundList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundList.swift; sourceTree = "<group>"; };
+		96D4CFD02AB218BC00F8C2DC /* CoreLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreLocation.swift; sourceTree = "<group>"; };
+		96D4CFD22AB2194600F8C2DC /* Polyline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Polyline.swift; sourceTree = "<group>"; };
+		96D4CFD42AB227D100F8C2DC /* mapStyle.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mapStyle.json; sourceTree = "<group>"; };
+		96D4CFD62AB3649700F8C2DC /* speech.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = speech.mp3; sourceTree = "<group>"; };
 		C75EB17D265C2AFE00623E3B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		C799A657263BBB39000E6127 /* SoundNavigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoundNavigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C799A65E263BBB3C000E6127 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -82,10 +92,20 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		96D4CFCF2AB2188000F8C2DC /* Polyline */ = {
+			isa = PBXGroup;
+			children = (
+				96D4CFD02AB218BC00F8C2DC /* CoreLocation.swift */,
+				96D4CFD22AB2194600F8C2DC /* Polyline.swift */,
+			);
+			path = Polyline;
+			sourceTree = "<group>";
+		};
 		C799A64E263BBB39000E6127 = {
 			isa = PBXGroup;
 			children = (
 				9696BA792A94D4E700BFFDDA /* test.mp3 */,
+				96D4CFD62AB3649700F8C2DC /* speech.mp3 */,
 				96D4CFC72AB067E800F8C2DC /* left.mp3 */,
 				96D4CFC82AB067E800F8C2DC /* right.mp3 */,
 				C799A66A263BBB93000E6127 /* README.md */,
@@ -134,7 +154,10 @@
 			isa = PBXGroup;
 			children = (
 				C799A66D263BBBB4000E6127 /* ContentView.swift */,
+				96D4CFD42AB227D100F8C2DC /* mapStyle.json */,
+				96D4CFCB2AB0D73D00F8C2DC /* SoundList.swift */,
 				963C05682AACE4FB00F5FD52 /* Location.swift */,
+				96D4CFCF2AB2188000F8C2DC /* Polyline */,
 			);
 			path = Support;
 			sourceTree = "<group>";
@@ -201,10 +224,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96D4CFD72AB3649700F8C2DC /* speech.mp3 in Resources */,
 				C799A662263BBB3C000E6127 /* Preview Assets.xcassets in Resources */,
 				96D4CFC92AB067E800F8C2DC /* left.mp3 in Resources */,
 				96D4CE732AAF7D4500F8C2DC /* GoogleService-Info.plist in Resources */,
 				96D4CFCA2AB067E800F8C2DC /* right.mp3 in Resources */,
+				96D4CFD52AB227D100F8C2DC /* mapStyle.json in Resources */,
 				C799A65F263BBB3C000E6127 /* Assets.xcassets in Resources */,
 				9696BA7A2A94D4E800BFFDDA /* test.mp3 in Resources */,
 			);
@@ -276,12 +301,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96D4CFD32AB2194600F8C2DC /* Polyline.swift in Sources */,
+				96D4CFCC2AB0D73D00F8C2DC /* SoundList.swift in Sources */,
 				96D4CE752AAF7D6A00F8C2DC /* FirebaseManager.swift in Sources */,
 				9696BA762A94B9C300BFFDDA /* PanoViewController.swift in Sources */,
 				964AE8392AACCB1E005D727F /* SoundNavigationApp.swift in Sources */,
 				963C05692AACE4FB00F5FD52 /* Location.swift in Sources */,
 				C799A671263BBBB4000E6127 /* ContentView.swift in Sources */,
 				9696BA782A94CE3E00BFFDDA /* SpatialAudioEngine.swift in Sources */,
+				96D4CFD12AB218BC00F8C2DC /* CoreLocation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -124,13 +124,15 @@ class AppState: ObservableObject {
     static func advanceDetectionStates(_ oldStates: [(SoundIdentifier, DetectionState)],
                                        givenClassificationResult result: SNClassificationResult) -> [(SoundIdentifier, DetectionState)] {
         var totalDetectedNum = 0
+        var sources_array:[String] = []
         let confidenceForLabel = { (sound: SoundIdentifier) -> Double in
             let confidence: Double
             let label = sound.labelName
             if let classification = result.classification(forIdentifier: label) {
                 confidence = classification.confidence
-                if(confidence > 0.2){
+                if(confidence > 0.4){
                     totalDetectedNum += 1;
+                    sources_array.append(label)
                 }
             } else {
                 confidence = 0
@@ -142,15 +144,17 @@ class AppState: ObservableObject {
             (key, DetectionState(advancedFrom: value, currentConfidence: confidenceForLabel(key)))
         }
         
-        print("updating", isDetecting, totalDetectedNum)
+        print(sources_array)
         
-        if(!isDetecting && totalDetectedNum > 0){
-            FirebaseManager().sendData(state: true, soundNum: totalDetectedNum)
+        if((!isDetecting || (isDetecting && FirebaseManager.detectionCell.number != totalDetectedNum)) && totalDetectedNum > 0){
+            FirebaseManager().sendData(state: true, soundNum: totalDetectedNum, sources: sources_array)
             isDetecting = true
+            FirebaseManager.detectionCell.number = totalDetectedNum
         }
         else if(isDetecting && totalDetectedNum == 0){
-            FirebaseManager().sendData(state: false, soundNum: totalDetectedNum)
+            FirebaseManager().sendData(state: false, soundNum: totalDetectedNum, sources: sources_array)
             isDetecting = false
+            FirebaseManager.detectionCell.number = totalDetectedNum
         }
         
         return newStates

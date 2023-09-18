@@ -15,6 +15,7 @@ class LocationModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     var locationManager = CLLocationManager()
     @Published var withLatitude: CGFloat = 25.034012
     @Published var longitude: CGFloat = 121.564461
+    @Published var sources: [String] = []
     
     override init() {
         super.init()
@@ -34,7 +35,6 @@ class LocationModel: NSObject, ObservableObject, CLLocationManagerDelegate {
         }
         withLatitude = latestLocation.coordinate.latitude
         longitude = latestLocation.coordinate.longitude
-        print(withLatitude, longitude)
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {

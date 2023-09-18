@@ -17,20 +17,25 @@ struct SoundInfo: Identifiable, Codable {
     var x: Float
     var y: Float
     var z: Float
+    var message: String
 }
 
-class SpatialAudioEngine: NSObject {
+class SpatialAudioEngine: NSObject, ObservableObject {
     var audioController = GVRAudioEngine(renderingMode: kRenderingModeBinauralHighQuality)
     var soundSourceID : Int32 = 0
+    var speechSourceID : Int32 = 100
+    @Published var currentID: Int = -1
     
-    var soundMap = [0: SoundInfo(id: 0, soundSourceID: 0, x: -1, y: 1, z: 0), 1: SoundInfo(id: 1, soundSourceID: 1, x: 3, y: 1, z: 0)]
+    var soundMap = [0: SoundInfo(id: 0, soundSourceID: 0, x: -1, y: 1, z: 0, message: "goes left"), 1: SoundInfo(id: 1, soundSourceID: 1, x: 3, y: 1, z: 0, message: "goes right")]
     
-    init(audioController: GVRAudioEngine = GVRAudioEngine(renderingMode: kRenderingModeBinauralHighQuality), soundSourceID : Int32 = 0) {
+    init(audioController: GVRAudioEngine = GVRAudioEngine(renderingMode: kRenderingModeBinauralHighQuality), soundSourceID : Int32 = 0, speechSourceID:Int32 = 100) {
         self.audioController = audioController
         self.audioController?.preloadSoundFile(String("left.mp3"))
         soundMap[0]?.soundSourceID =  (self.audioController?.createSoundObject(String("left.mp3")))!
         self.audioController?.preloadSoundFile(String("right.mp3"))
         soundMap[1]?.soundSourceID =  (self.audioController?.createSoundObject(String("right.mp3")))!
+        self.audioController?.preloadSoundFile(String("speech.mp3"))
+        self.speechSourceID = (self.audioController?.createSoundObject(String("speech.mp3")))!
     }
     
     func stop(){
@@ -42,6 +47,7 @@ class SpatialAudioEngine: NSObject {
 //        self.audioController?.stopSound(soundMap[1]!.soundSourceID)
         soundMap[0]?.soundSourceID =  (self.audioController?.createSoundObject(String("left.mp3")))!
         soundMap[1]?.soundSourceID =  (self.audioController?.createSoundObject(String("right.mp3")))!
+        self.speechSourceID = (self.audioController?.createSoundObject(String("speech.mp3")))!
     }
     
     func soundPlay(_ soundSourceID: Int32, _ x: Float, _ y: Float, _ z: Float){

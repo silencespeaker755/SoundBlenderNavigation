@@ -7,29 +7,66 @@
 //
 
 import Foundation
+import SwiftUI
 import FirebaseDatabase
 
 struct DetectionCell: Identifiable, Codable {
     var id: Int
     var state: Bool
     var number: Int
+    var sources: [String]
 }
 
 class FirebaseManager: ObservableObject {
     static let databasePath: DatabaseReference = Database.database().reference()
     
-    func observeDetectionChanges(audioEngine: SpatialAudioEngine) {
+    func observeDetectionChanges(audioEngine: SpatialAudioEngine, soundList: Binding<[String]>, message: Binding<String>, currentID: Binding<Int>) {
         FirebaseManager.databasePath.child("Detection").observe(.value, with: { snapshot in
             if let data = snapshot.value as? [String: Any] {
                 if let boolValue = data["state"] as? Bool {
                     if(boolValue){
                         print(true)
                         SoundNavigationApp.playingAvailable = true
+                        soundList.wrappedValue = data["sources"] as! [String]
+                        if(soundList.wrappedValue.contains("speech")) {
+                            SoundNavigationApp.someoneSpeeching = true
+                        }
+                        print(soundList.wrappedValue)
                     } else{
                         if(SoundNavigationApp.playingAvailable){
-                            let soundInfo = audioEngine.soundMap[Int.random(in: 0...1)]!
-                            audioEngine.soundPlay(soundInfo.soundSourceID, soundInfo.x, soundInfo.y, soundInfo.z)
+                            var index: Int
+//                            if(currentID.wrappedValue == -1){
+//                                index = Int.random(in: 1...1)
+//                                message.wrappedValue = audioEngine.soundMap[index]!.message
+//                            }
+                            if(currentID.wrappedValue != -1) {
+//                            else{
+//                                index = currentID.wrappedValue
+//                                audioEngine.currentID = -1
+//                                currentID.wrappedValue = -1
+//                            }
+                                index = currentID.wrappedValue
+                                audioEngine.currentID = -1
+                                currentID.wrappedValue = -1
+                                let soundInfo = audioEngine.soundMap[index]!
+                                audioEngine.soundPlay(soundInfo.soundSourceID, soundInfo.x, soundInfo.y, soundInfo.z)
+                                SoundNavigationApp.isPlaying = true
+                                SoundNavigationApp.someoneSpeeching = false
+                                
+                                let varTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false)
+                                { (varTimer) in
+                                    message.wrappedValue = ""
+                                    SoundNavigationApp.isPlaying = false
+                                    print("---------------Speech-----------:  " + String(SoundNavigationApp.someoneSpeeching))
+                                    if(SoundNavigationApp.someoneSpeeching) {
+                                        audioEngine.soundPlay(audioEngine.speechSourceID, 1, 1, 0)
+                                    }
+                                    SoundNavigationApp.someoneSpeeching = false
+                                }
+                            }
                         }
+                        soundList.wrappedValue = []
+                        SoundNavigationApp.playingAvailable = false;
                     }
                 }
             }
@@ -51,7 +88,7 @@ class FirebaseManager: ObservableObject {
     }
     
     func sendData(state: Bool, soundNum: Int) {
-        let temp = try? JSONEncoder().encode(DetectionCell(id: 0, state: state, number: soundNum))
+        let temp = try? JSONEncoder().encode(DetectionCell(id: 0, state: state, number: soundNum, sources: []))
         let json = try? JSONSerialization.jsonObject(with: temp!)
         FirebaseManager.databasePath.child("Detection").setValue(json)
 //        updateRealmData(updateID: 0, data: json as Any)
